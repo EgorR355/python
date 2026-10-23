@@ -1,0 +1,37 @@
+
+BUG-1. capitalize() переводит в нижний регистр всю строку
+
+Тест:     test_capitalize_preserves_rest_of_case (FAILED)
+Где:      StringUtils.capitalize()
+Важность: Major / High
+
+Что делаю:  capitalize("hello WORLD")
+Ожидаемый результат:     "Hello WORLD"   (заглавная только первая буква)
+Фактический результат:    "Hello world"   (всё остальное стало строчным)
+
+
+BUG-2. trim() не удаляет табы и переводы строк
+
+Тест:     test_trim_tabs_and_newlines (FAILED)
+Где:      StringUtils.trim()
+Важность: Major / High
+
+Что делаю:  trim("\t\nskypro")
+Ожидаемый результат:     "skypro"
+Фактический результат:    "\t\nskypro"   (удаляются только пробелы " ")
+
+
+BUG-3. Методы падают с AttributeError на None
+
+Тесты (4 FAILED):
+  test_none_input_raises_type_error[capitalize-args0]
+  test_none_input_raises_type_error[trim-args1]
+  test_none_input_raises_type_error[contains-args2]
+  test_none_input_raises_type_error[delete_symbol-args4]
+Где:      все методы StringUtils
+Важность: Major / High
+
+Что делаю:  capitalize(None), trim(None),
+            contains(None, "a"), delete_symbol(None, "a")
+Ожидаемый результат:     TypeError с понятным текстом
+Фактический результат:    AttributeError: 'NoneType' object has no attribute ...
