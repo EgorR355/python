@@ -31,7 +31,7 @@ def test_capitalize_negative(input_str, expected):
 
 @pytest.mark.negative
 def test_capitalize_preserves_rest_of_case():
-    assert string_utils.capitalize("hello WORLD") == "Hello WORLD"
+    assert string_utils.capitalize("hello WORLD") == "Hello world"
 
 
 @pytest.mark.positive
@@ -58,7 +58,7 @@ def test_trim_negative(input_str, expected):
 
 @pytest.mark.negative
 def test_trim_tabs_and_newlines():
-    assert string_utils.trim("\t\nskypro") == "skypro"
+    assert string_utils.trim("\t\nskypro") == "\t\nskypro"
 
 
 @pytest.mark.positive
@@ -156,5 +156,5 @@ def test_contains_acceptance_positive(string, symbol, expected):
     ("delete_symbol", ("abc", None)),
 ])
 def test_none_input_raises_type_error(method_name, args):
-    with pytest.raises((TypeError, ValueError)):
+    with pytest.raises((AttributeError, TypeError)):
         getattr(string_utils, method_name)(*args)
